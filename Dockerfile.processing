@@ -1,0 +1,12 @@
+FROM openjdk:11-jdk-slim
+
+WORKDIR /app
+
+COPY ProcessingServer.java .
+COPY data/ ./LIBROS_TXT/
+
+RUN javac ProcessingServer.java
+
+EXPOSE 8081
+
+CMD ["java", "ProcessingServer", "1"]

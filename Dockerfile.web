@@ -1,0 +1,12 @@
+FROM openjdk:11-jdk-slim
+
+WORKDIR /app
+
+COPY WebServer.java .
+COPY ConsoleApp.java .
+
+RUN javac *.java
+
+EXPOSE 8080
+
+CMD ["java", "WebServer"]

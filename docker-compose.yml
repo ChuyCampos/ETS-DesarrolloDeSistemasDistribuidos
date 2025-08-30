@@ -1,0 +1,42 @@
+services:
+  web-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - processing-server-1
+      - processing-server-2
+      - processing-server-3
+    networks:
+      - app-network
+
+  processing-server-1:
+    build:
+      context: .
+      dockerfile: Dockerfile.processing
+    command: ["java", "ProcessingServer", "1"]
+    networks:
+      - app-network
+
+  processing-server-2:
+    build:
+      context: .
+      dockerfile: Dockerfile.processing
+    command: ["java", "ProcessingServer", "2"]
+    networks:
+      - app-network
+
+  processing-server-3:
+    build:
+      context: .
+      dockerfile: Dockerfile.processing
+    command: ["java", "ProcessingServer", "3"]
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
